@@ -1,4 +1,4 @@
-import Navbar from "./Navbar/Navbar"
+import Navbar from "./components/Navbar/Navbar"
 import Home from "./pages/Home/Home";
 
 function App() {
@@ -6,9 +6,6 @@ function App() {
     <>
       <Navbar/>
       <Home/>
-      <div style={{ height: '1500px' }}> {/* Add large height for testing scroll */}
-        Scroll down to test the sticky navbar.
-      </div>
     </>
   );
 }
