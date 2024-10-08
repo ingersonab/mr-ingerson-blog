@@ -1,5 +1,6 @@
 import React from 'react';
-import "./Navbar.css"
+import "./Navbar.css";
+import {Link} from "react-router-dom";
 
 export default function Navbar() {
     return (
@@ -9,15 +10,35 @@ export default function Navbar() {
             <div className="topLeft">
                 <i className="topIcon fa-brands fa-linkedin"></i>
                 <i className="topIcon fa-brands fa-facebook"></i>
+                <i class="topIcon fa-brands fa-youtube"></i>
                 <i className="topIcon fa-solid fa-envelope"></i>
             </div>
             <div className="topCenter">
                 <ul className= "topList">
-                    <li className="topListItem">Home</li>
-                    <li className="topListItem">About</li>
-                    <li className="topListItem">Blog</li>
-                    <li className="topListItem">Contact</li>
-                    <li className="topListItem">Login</li>
+                    <li className="topListItem">
+                        <Link
+                            to='/'
+                            className="topListLink"
+                        >
+                            Home
+                        </Link>
+                    </li>
+                    <li className="topListItem">
+                        <Link
+                            to='/about'
+                            className="topListLink"
+                        >
+                            About
+                        </Link>
+                    </li>
+                    <li className="topListItem">
+                        <Link
+                            to='/contact'
+                            className="topListLink"
+                        >
+                            Contact
+                        </Link>
+                    </li>
                 </ul>
             </div>
             <div className="topRight">

@@ -55,7 +55,12 @@
     cursor: pointer;
 }
 
-.topListItem:hover{
+.topListLink{
+    text-decoration: none;
+    color: #666;
+}
+
+.topListLink:hover{
     color: green;
 }
 

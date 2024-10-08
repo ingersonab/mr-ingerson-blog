@@ -23,6 +23,7 @@ export default function Sidebar() {
         <div className="sidebarSocial">
           <i className="sidebarIcon fa-brands fa-linkedin"></i>
           <i className="sidebarIcon fa-brands fa-facebook"></i>
+          <i class="sidebarIcon fa-brands fa-youtube"></i>
         </div>
       </div>
     </div>
