@@ -1,18 +1,45 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./singlePost.css"
+import {useParams} from 'react-router-dom'
+import { createClient } from 'contentful';
 
 export default function SinglePost() {
+
+  const [singleBlogPost, setSingleBlogPost] = useState([])
+
+  const client = createClient({space: "c2coqf0hrs8z", accessToken: "rO_zDMrrcg28Vx21OpMLpsSkTxmX7uOL8molgDLYoPs"})
+
+  const {id} = useParams()
+  console.log(id)
+
+  useEffect(() => {
+    const getEntryById = async () => {
+      try{
+        await client.getEntry(id).then((entry) => {
+          console.log(entry)
+          setSingleBlogPost(entry)
+        })
+      }catch(err){
+        console.log("error with retreiving the entry by id: ", err)
+      }
+    }
+      getEntryById()
+  }, [])
+
+  console.log(singleBlogPost)
+
   return (
     <div className="singlePost">
-        <div className="singlePostWrapper">
-            <img src="./img/alexander-grey-eMP4sYPJ9x0-unsplash.jpg" alt="" className="singlePostImg" />
-            <h1 className="singlePostTitle">Lorem ipsum dolor sit.</h1>
-            <div className="singlePostInfo">
-                <span className="singlePostAuthor">Author: <b>Mark</b></span>
-                <span className="singlePostDate">1 hour ago</span>
-            </div>
-            <p className="singlePostDesc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse impedit ea a sint necessitatibus vitae quo reprehenderit perspiciatis, excepturi expedita voluptatibus obcaecati deserunt architecto itaque error quos at minus asperiores quam ipsa consequuntur voluptatem ducimus veniam qui. Nostrum debitis similique officia necessitatibus, voluptatibus quisquam ab. Vero aspernatur fuga enim reiciendis! Reprehenderit dolore culpa blanditiis, voluptates itaque voluptas placeat officia delectus perferendis fugit provident sunt voluptatum facere molestiae aperiam soluta numquam nemo asperiores, eius unde laudantium quis, veritatis facilis! Placeat, deleniti! Dolor vitae inventore illo perferendis fugiat, quidem nobis laborum officiis adipisci aliquid tempore mollitia eaque sit, ea dolorum magnam. Asperiores!</p>
-        </div>
+      <div className="singlePostWrapper">
+        <img src={singleBlogPost?.fields?.blogImage?.fields?.file?.url} alt={singleBlogPost?.fields?.blogTitle} className="singlePostImg" />
+          <h1 className="singlePostTitle">{singleBlogPost?.fields?.blogTitle}</h1>
+          <br/>
+          <div className="singlePostInfo">
+            <span className="singlePostAuthor">Author: <b>{singleBlogPost?.fields?.blogAuthor}</b></span>
+            <span className="singlePostDate">{singleBlogPost?.fields?.createdDate}</span>
+          </div>
+          <p className="singlePostDesc">{singleBlogPost?.fields?.postContent}</p>
+      </div>
     </div>
   )
 }

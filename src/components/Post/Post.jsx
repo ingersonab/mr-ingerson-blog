@@ -1,31 +1,56 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Post.css"
 import {Link} from "react-router-dom";
+import { createClient } from 'contentful';
 
 export default function Post() {
+
+  const [blogPosts, setBlogPosts] = useState([])
+
+  const client = createClient({space: "c2coqf0hrs8z", accessToken: "rO_zDMrrcg28Vx21OpMLpsSkTxmX7uOL8molgDLYoPs"})
+
+  useEffect(() => {
+    const getAllEntries = async () => {
+      try{
+        await client.getEntries().then((entries) => {
+          console.log(entries)
+          setBlogPosts(entries)
+        })
+      } catch(err) {
+        console.log("Error with fetching blog entries: ", err)
+      }
+    }
+    getAllEntries()
+  }, [])
+
   return (
-    <Link
-      to='/postDetails'
-      className="postLink"
-    >
-      <div className="post">
-        <img className="postImg"
-          src="./img/alexander-grey-eMP4sYPJ9x0-unsplash.jpg"
-          alt="post_img"
-        />
-        <div className="postInfo">
-          <div className="postCats">
-              <span className="postCat">Teaching</span>
-              <span className="postCat">Coaching</span>
+    <>
+      {blogPosts?.items?.map((post) => 
+        <Link
+          to={`/postDetails/${post.sys.id}`}
+          className="postLink"
+          key={post.sys.id}
+        >
+          <div className="post">
+            <img className="postImg"
+              src={post.fields.blogImage.fields.file.url}
+              alt={post.fields.blogTitle}
+            />
+            <div className="postInfo">
+              <div className="postCats">
+                  <span className="postCat">Teaching</span>
+                  <span className="postCat">Coaching</span>
+              </div>
+              <span className="postTitle">{post.fields.blogTitle}</span>
+              <hr />
+              <span className="postDate">{post.fields.createdDate}</span>
+            </div>
+            <p className="postDesc">
+              {post.fields.postContent}
+            </p>
           </div>
-          <span className="postTitle">Lorem ipsum dolor sit.</span>
-          <hr />
-          <span className="postDate">1 hour ago</span>
-        </div>
-        <p className="postDesc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ab fuga harum consequuntur laboriosam doloribus exercitationem adipisci et laudantium ut ipsam modi, deleniti cupiditate beatae earum fugit culpa voluptatum doloremque incidunt delectus tempore. Alias tenetur laudantium doloribus. Consectetur libero quasi, voluptatum itaque consequuntur modi et rem illo perferendis iure impedit corporis mollitia quae aliquam doloribus autem esse velit quod voluptate quam nobis. Fuga hic officia saepe iste ullam quo aliquam debitis recusandae magnam commodi placeat illo ratione, est, odit fugiat quas in possimus ad! Explicabo mollitia rem ipsa animi enim perspiciatis natus error numquam dolores. Officiis aperiam ipsum rerum veritatis?
-        </p>
-      </div>
-    </Link>
+        </Link>
+      )}  
+    </>
   )
 }
