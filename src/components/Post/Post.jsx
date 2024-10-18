@@ -12,10 +12,11 @@ export default function Post() {
   useEffect(() => {
     const getAllEntries = async () => {
       try{
-        await client.getEntries().then((entries) => {
-          console.log(entries)
-          setBlogPosts(entries)
+        const blogEntries = await client.getEntries({
+          content_type: 'blogPost',
         })
+        setBlogPosts(blogEntries.items);
+
       } catch(err) {
         console.log("Error with fetching blog entries: ", err)
       }
@@ -25,7 +26,7 @@ export default function Post() {
 
   return (
     <>
-      {blogPosts?.items?.map((post) => 
+      {blogPosts?.map((post) => (
         <Link
           to={`/postDetails/${post.sys.id}`}
           className="postLink"
@@ -50,7 +51,7 @@ export default function Post() {
             </p>
           </div>
         </Link>
-      )}  
+      ))}
     </>
   )
 }
