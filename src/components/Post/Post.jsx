@@ -3,7 +3,7 @@ import "./Post.css"
 import {Link} from "react-router-dom";
 import { createClient } from 'contentful';
 
-export default function Post() {
+export default function Post({selectedCategory}) {
 
   const [blogPosts, setBlogPosts] = useState([])
 
@@ -15,7 +15,10 @@ export default function Post() {
         const blogEntries = await client.getEntries({
           content_type: 'blogPost',
         })
-        console.log(blogEntries)
+        console.log('Fetched Blog Entries:', blogEntries.items);  // Log all blog entries
+        blogEntries.items.forEach((post) =>
+          console.log('Post Categories:', post.fields?.blogCategory)  // Log each post's categories
+        );
         setBlogPosts(blogEntries.items);
 
       } catch(err) {
@@ -25,9 +28,22 @@ export default function Post() {
     getAllEntries()
   }, [])
 
+  //filter posts by selected category
+  const filteredPosts = selectedCategory
+    ? blogPosts.filter((post) =>
+      post.fields?.blogCategory?.some(
+        (category) =>
+          category.toLowerCase().trim() === selectedCategory.toLowerCase().trim()
+      )
+    )
+    : blogPosts;
+
+    console.log('Selected Category:', selectedCategory);  // Debugging
+    console.log('Filtered Posts:', filteredPosts); 
+
   return (
     <>
-      {blogPosts?.map((post) => (
+      {filteredPosts?.map((post) => (
         <Link
           to={`/postDetails/${post.sys.id}`}
           className="postLink"
@@ -35,7 +51,7 @@ export default function Post() {
         >
           <div className="post">
             <img className="postImg"
-              src={post.fields.blogImage.fields.file.url}
+              src={post.fields.blogImage?.fields?.file?.url}
               alt={post.fields.blogTitle}
             />
             <div className="postInfo">

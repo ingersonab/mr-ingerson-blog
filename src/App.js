@@ -3,6 +3,7 @@ import About from "./pages/About/About";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import PostDetail from "./pages/single/postDetail";
+import Footer from "./components/Footer/Footer";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
       </Routes>
+      <Footer/>
     </Router>
   );
 }

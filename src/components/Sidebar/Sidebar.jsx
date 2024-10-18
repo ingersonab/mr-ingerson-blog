@@ -2,7 +2,7 @@ import React, {useEffect, useState}  from 'react'
 import "./Sidebar.css"
 import { createClient } from 'contentful';
 
-export default function Sidebar() {
+export default function Sidebar({setSelectedCategory}) {
 
   const [sidebarBio, setSidebarBio] = useState(null);
 
@@ -25,6 +25,9 @@ export default function Sidebar() {
     }
     getAllEntries()
   }, [])
+
+  const categories = ['Teaching', 'Coaching', 'Health', 'Parenting'];
+
   return (
     <div className="sidebar">
       {sidebarBio && (
@@ -37,10 +40,18 @@ export default function Sidebar() {
       <div className="sidebarItem">
         <span className="sidebarTitle">Categories</span>
         <ul className="sidebarList">
-          <li className="sidebarListItem">Teaching</li>
-          <li className="sidebarListItem">Coaching</li>
-          <li className="sidebarListItem">Health</li>
-          <li className="sidebarListItem">Parenting</li>
+          {categories.map((category, index) => (
+            <li
+              key={index}
+              className="sidebarListItem"
+              onClick={() => {
+                console.log(`Category clicked: ${category}`);
+                setSelectedCategory(category)
+              }}
+            >
+              {category}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="sidebarItem">
