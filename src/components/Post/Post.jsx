@@ -15,6 +15,7 @@ export default function Post() {
         const blogEntries = await client.getEntries({
           content_type: 'blogPost',
         })
+        console.log(blogEntries)
         setBlogPosts(blogEntries.items);
 
       } catch(err) {
@@ -39,8 +40,9 @@ export default function Post() {
             />
             <div className="postInfo">
               <div className="postCats">
-                  <span className="postCat">Teaching</span>
-                  <span className="postCat">Coaching</span>
+                  {post.fields?.blogCategory?.map((category, index) => (
+                    <span key={index} className="postCat">{category}</span>
+                  ))}
               </div>
               <span className="postTitle">{post.fields.blogTitle}</span>
               <hr />
