@@ -1,0 +1,63 @@
+.contact{
+    display: flex;
+    flex-direction: column;
+    padding: 75px;
+    font-family: 'Josefin Sans', sans-serif;
+    align-items: center;
+    /*width: 500px;*/
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    background-color: rgb(228, 228, 228);
+    box-shadow: 5px 5px 5px black;
+    border-radius: 7px;
+}
+
+.contactImg{
+    padding-bottom: 25px;
+}
+
+.contactHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.contactDivider {
+    width: 100%; /* You can adjust the width */
+    height: 1px;  /* Adjust the thickness */
+    background-color: black; /* Customize the color */
+    border: none;
+    margin-top: 10px; /* Adjust spacing */
+    margin-bottom: 40px; /* Adjust spacing */
+}
+
+.iconsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emailContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    font-size: 16px; 
+    padding-bottom: 10px;
+}
+
+.emailContainer p, .linkedinContainer p {
+    min-width: 250px; 
+    text-align: left; 
+  }
+
+.linkedinContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    font-size: 16px; 
+    padding-bottom: 100px;
+}

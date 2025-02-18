@@ -47,3 +47,14 @@
     color: cyan
 }
 
+@media screen and (max-width: 710px) {
+    .footerRight{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+    }
+}
+
+
