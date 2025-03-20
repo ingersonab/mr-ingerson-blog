@@ -2,11 +2,15 @@ import React from 'react'
 import './Footer.css'
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="footer">
-        <div className="footerCenter">
-            <h4 className="footerText">© 2024 Mr. Ingerson Blogs</h4>
-            <h4 className="footerText">Made with 💖 by <a className="footerLink" href="https://alyssaingerson.com/">Alyssa Ingerson</a></h4> 
+        <div className="footerCenter1">
+            <h4 className="footerText">© {currentYear} Mr. Ingerson Blogs</h4> 
+        </div>
+        <div className="footerCenter2">
+          <h4 className="footerText">Made with 💖 by <a className="footerLink" href="https://alyssaingerson.com/">Alyssa Ingerson</a></h4>
         </div>
         <div className="footerRight">
             <i className="footerIcon fa-brands fa-linkedin"></i>
